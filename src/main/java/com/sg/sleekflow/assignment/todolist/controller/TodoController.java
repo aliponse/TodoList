@@ -1,5 +1,7 @@
 package com.sg.sleekflow.assignment.todolist.controller;
 
+import com.sg.sleekflow.assignment.todolist.dto.TodoDTO;
+import com.sg.sleekflow.assignment.todolist.mapper.TodoMapper;
 import com.sg.sleekflow.assignment.todolist.model.Todo;
 import com.sg.sleekflow.assignment.todolist.service.TodoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/todo")
+@RequestMapping("/api/todos")
 @Tag(name = "Todo API", description = "APIs for todo")
 public class TodoController {
 
@@ -45,7 +47,9 @@ public class TodoController {
     @Operation(summary = "Add a new todo", description = "Create a new TODO")
     @ApiResponse(responseCode = "200", description = "TODO created successfully")
     @PostMapping
-    public Todo addTodo(@Valid @RequestBody Todo todo) {
+    public Todo addTodo(@Valid @RequestBody TodoDTO todoDTO) {
+
+        Todo todo = TodoMapper.INSTANCE.toModel(todoDTO);
         return todoService.addTodo(todo);
     }
 
@@ -53,7 +57,10 @@ public class TodoController {
     @ApiResponse(responseCode = "200", description = "TODO updated successfully")
     @ApiResponse(responseCode = "404", description = "TODO not found")
     @PutMapping("/{id}")
-    public ResponseEntity<Todo> updateTodo(@Parameter(description = "ID of the TODO") @PathVariable String id, @Valid @RequestBody Todo updatedTodo) {
+    public ResponseEntity<Todo> updateTodo(@Parameter(description = "ID of the TODO") @PathVariable String id, @Valid @RequestBody TodoDTO todoDTO) {
+
+        Todo updatedTodo = TodoMapper.INSTANCE.toModel(todoDTO);
+
         Optional<Todo> todo = todoService.updateTodo(id, updatedTodo);
         return todo.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }

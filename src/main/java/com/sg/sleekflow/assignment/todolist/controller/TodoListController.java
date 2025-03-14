@@ -1,5 +1,9 @@
 package com.sg.sleekflow.assignment.todolist.controller;
 
+import com.sg.sleekflow.assignment.todolist.dto.TodoListDTO;
+import com.sg.sleekflow.assignment.todolist.mapper.TodoListMapper;
+import com.sg.sleekflow.assignment.todolist.mapper.TodoMapper;
+import com.sg.sleekflow.assignment.todolist.model.Todo;
 import com.sg.sleekflow.assignment.todolist.model.TodoList;
 import com.sg.sleekflow.assignment.todolist.service.TodoListService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/todolist")
+@RequestMapping("/api/todolists")
 @Tag(name = "Todolist API", description = "APIs for todolist")
 public class TodoListController {
 
@@ -59,7 +63,9 @@ public class TodoListController {
     @Operation(summary = "Add a new todoList", description = "Create a new TodoList")
     @ApiResponse(responseCode = "200", description = "TodoList created successfully")
     @PostMapping
-    public TodoList addTodoList(@Valid @RequestBody TodoList todoList) {
+    public TodoList addTodoList(@Valid @RequestBody TodoListDTO todoListDTO) {
+
+        TodoList todoList = TodoListMapper.INSTANCE.toModel(todoListDTO);
         return todoListService.addTodoList(todoList);
     }
 
@@ -67,7 +73,9 @@ public class TodoListController {
     @ApiResponse(responseCode = "200", description = "TodoList updated successfully")
     @ApiResponse(responseCode = "404", description = "TodoList not found")
     @PutMapping("/{id}")
-    public ResponseEntity<TodoList> updateTodoList(@Parameter(description = "ID of the TodoList") @PathVariable String id, @Valid @RequestBody TodoList updatedTodoList) {
+    public ResponseEntity<TodoList> updateTodoList(@Parameter(description = "ID of the TodoList") @PathVariable String id, @Valid @RequestBody TodoListDTO todoListDTO) {
+
+        TodoList updatedTodoList = TodoListMapper.INSTANCE.toModel(todoListDTO);
         Optional<TodoList> todoList = todoListService.updateTodoList(id, updatedTodoList);
         return todoList.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }

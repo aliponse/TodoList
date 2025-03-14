@@ -1,5 +1,7 @@
 package com.sg.sleekflow.assignment.todolist;
 
+import com.sg.sleekflow.assignment.todolist.dto.TodoDTO;
+import com.sg.sleekflow.assignment.todolist.mapper.TodoMapper;
 import com.sg.sleekflow.assignment.todolist.model.Todo;
 import com.sg.sleekflow.assignment.todolist.service.TodoService;
 import org.junit.jupiter.api.BeforeEach;
@@ -70,7 +72,7 @@ class TodoUnitTest {
         when(todoService.getAllTodos("list1")).thenReturn(todos);
 
         // Perform GET request and verify
-        mockMvc.perform(get("/api/todo/todolist/list1/todos")
+        mockMvc.perform(get("/api/todos/todolist/list1/todos")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Task 1"))
@@ -95,7 +97,7 @@ class TodoUnitTest {
         when(todoService.getTodoById("1")).thenReturn(Optional.of(todo));
 
         // Perform GET request and verify
-        mockMvc.perform(get("/api/todo/1")
+        mockMvc.perform(get("/api/todos/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Task 1"));
@@ -107,7 +109,7 @@ class TodoUnitTest {
         when(todoService.getTodoById("1")).thenReturn(Optional.empty());
 
         // Perform GET request and verify
-        mockMvc.perform(get("/api/todo/1")
+        mockMvc.perform(get("/api/todos/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
@@ -115,16 +117,15 @@ class TodoUnitTest {
     @Test
     void testAddTodo() throws Exception {
         // Mock data
-        Todo todo = new Todo();
-        todo.setId("1");
-        todo.setListId("list1");
-        todo.setName("Task 1");
-        todo.setDescription("desp1");
-        todo.setCrdt("CRDT Content 1");
-        todo.setDueDate("2025-5-5 00:00:00");
-        todo.setStatus("1");
-        todo.setPriority("2");
-        todo.setTags(Arrays.asList("work","red"));
+        TodoDTO todoDTO = new TodoDTO();
+        todoDTO.setListId("list1");
+        todoDTO.setName("Task 1");
+        todoDTO.setDescription("desp1");
+        todoDTO.setCrdt("CRDT Content 1");
+        todoDTO.setDueDate("2025-5-5 00:00:00");
+        todoDTO.setStatus("1");
+        todoDTO.setPriority("2");
+        todoDTO.setTags(Arrays.asList("work","red"));
 
         Todo savedTodo = new Todo();
         savedTodo.setId("1");
@@ -141,9 +142,9 @@ class TodoUnitTest {
         when(todoService.addTodo(any(Todo.class))).thenReturn(savedTodo);
 
         // Perform POST request and verify
-        mockMvc.perform(post("/api/todo")
+        mockMvc.perform(post("/api/todos")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(todo)))
+                        .content(objectMapper.writeValueAsString(todoDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value("1"));
     }
@@ -162,13 +163,23 @@ class TodoUnitTest {
         todo.setPriority("4");
         todo.setTags(Arrays.asList("a","red"));
 
+        TodoDTO todoDTO = new TodoDTO();
+        todoDTO.setListId("list1");
+        todoDTO.setName("Task 12");
+        todoDTO.setDescription("desp12");
+        todoDTO.setCrdt("CRDT Content 12");
+        todoDTO.setDueDate("2025-5-5 00:00:00");
+        todoDTO.setStatus("3");
+        todoDTO.setPriority("4");
+        todoDTO.setTags(Arrays.asList("a","red"));
+
         // Mock service
         when(todoService.updateTodo("1", todo)).thenReturn(Optional.of(todo));
 
         // Perform PUT request and verify
-        mockMvc.perform(put("/api/todo/1")
+        mockMvc.perform(put("/api/todos/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(todo)))
+                        .content(objectMapper.writeValueAsString(todoDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Task 12"));
     }
@@ -191,7 +202,7 @@ class TodoUnitTest {
         when(todoService.updateTodo("1", todo)).thenReturn(Optional.empty());
 
         // Perform PUT request and verify
-        mockMvc.perform(put("/api/todo/1")
+        mockMvc.perform(put("/api/todos/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(todo)))
                 .andExpect(status().isNotFound());
@@ -203,7 +214,7 @@ class TodoUnitTest {
         when(todoService.deleteTodo("1")).thenReturn(true);
 
         // Perform DELETE request and verify
-        mockMvc.perform(delete("/api/todo/1")
+        mockMvc.perform(delete("/api/todos/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
@@ -214,7 +225,7 @@ class TodoUnitTest {
         when(todoService.deleteTodo("1")).thenReturn(false);
 
         // Perform DELETE request and verify
-        mockMvc.perform(delete("/api/todo/1")
+        mockMvc.perform(delete("/api/todos/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }

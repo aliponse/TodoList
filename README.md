@@ -2,7 +2,7 @@
 
 TodoList Application for assignment
 
-## GitHub repo
+## Github repo
     https://github.com/aliponse/TodoList.git
 ## Develop environment
     JDK: 17

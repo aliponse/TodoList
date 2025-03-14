@@ -62,7 +62,7 @@ class TodoListUnitTest {
         when(todoListService.getTodoListById("1")).thenReturn(Optional.of(todoList));
 
         // Perform GET request and verify
-        mockMvc.perform(get("/api/todolist/1")
+        mockMvc.perform(get("/api/todolists/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("worktasks"));
@@ -74,7 +74,7 @@ class TodoListUnitTest {
         when(todoListService.getTodoListById("1")).thenReturn(Optional.empty());
 
         // Perform GET request and verify
-        mockMvc.perform(get("/api/todolist/1")
+        mockMvc.perform(get("/api/todolists/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
@@ -109,7 +109,7 @@ class TodoListUnitTest {
         when(todoListService.addTodoList(any(TodoList.class))).thenReturn(savedTodoList);
 
         // Perform POST request and verify
-        mockMvc.perform(post("/api/todolist")
+        mockMvc.perform(post("/api/todolists")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(todoList)))
                 .andExpect(status().isOk())
@@ -120,7 +120,7 @@ class TodoListUnitTest {
     void testUpdateTodoList() throws Exception {
         // Mock data
         TodoList todoList = new TodoList();
-        todoList.setId("1");
+        todoList.setId("555721696464605184");
         todoList.setName("worktasks");
         todoList.setDescription("desp1");
         todoList.setStatus("1");
@@ -136,7 +136,7 @@ class TodoListUnitTest {
         when(todoListService.updateTodoList("1", todoList)).thenReturn(Optional.of(todoList));
 
         // Perform PUT request and verify
-        mockMvc.perform(put("/api/todolist/1")
+        mockMvc.perform(put("/api/todolists/555721696464605184")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(todoList)))
                 .andExpect(status().isOk())
@@ -163,7 +163,7 @@ class TodoListUnitTest {
         when(todoListService.updateTodoList("2", todoList)).thenReturn(Optional.empty());
 
         // Perform PUT request and verify
-        mockMvc.perform(put("/api/todolist/1")
+        mockMvc.perform(put("/api/todolists/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(todoList)))
                 .andExpect(status().isNotFound());
@@ -175,7 +175,7 @@ class TodoListUnitTest {
         when(todoListService.deleteTodoList("1")).thenReturn(true);
 
         // Perform DELETE request and verify
-        mockMvc.perform(delete("/api/todolist/1")
+        mockMvc.perform(delete("/api/todolists/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
@@ -186,7 +186,7 @@ class TodoListUnitTest {
         when(todoListService.deleteTodoList("1")).thenReturn(false);
 
         // Perform DELETE request and verify
-        mockMvc.perform(delete("/api/todolist/1")
+        mockMvc.perform(delete("/api/todolists/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
