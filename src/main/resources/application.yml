@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev # Default dev
+  messages:
+    locale: en
+
+# Common Config
+server:
+  port: 8080
+
+app:
+  jwt-secret: 60fosjWhlsy6bxLjSv5P/8fvmvanEEAjUQm3KLkSuMc=
+  jwt-expiration-milliseconds: 604800000
+
+logging:
+  config: classpath:logback-spring.xml
