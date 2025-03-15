@@ -15,7 +15,7 @@ TodoList Application for assignment built with Spring Boot 3.x, MongoDB, and Doc
    docker-compose up --build
 ## API Documentation
 1. Access the Swagger UI at: http://localhost:8080/swagger-ui/index.html.
-2. Swagger api-docs file is in ./src/doc.
+2. Swagger api-docs file is in ./src/doc and UI at:http://localhost:8080/v3/api-docs.
 ## Develop Environment
 1. JDK: 17
 2. Maven: 3.6.3
