@@ -29,11 +29,11 @@ public class TodoListController {
         this.todoListService = todoListService;
     }
 
-    /*@Operation(summary = "Get all TodoLists", description = "Retrieve a list of all TodoLists")
+    @Operation(summary = "Get all TodoLists", description = "Retrieve a list of all TodoLists")
     @GetMapping
     public List<TodoList> getAllTodoLists() {
         return todoListService.getAllTodoLists();
-    }*/
+    }
 
     @Operation(summary = "Get todoLists by groupId", description = "Retrieve a list of all TodoLists by groupId")
     @ApiResponse(responseCode = "200", description = "TodoList found")
