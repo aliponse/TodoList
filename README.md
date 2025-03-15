@@ -13,7 +13,7 @@ TodoList Application for assignment built with Spring Boot 3.x, MongoDB, and Doc
 4. Run the application using Docker:
    ```bash
    docker-compose up --build
-##API Documentation
+## API Documentation
 1. Access the Swagger UI at: http://localhost:8080/swagger-ui/index.html.
 2. Swagger api-docs file is in ./src/doc.
 ## Develop Environment
@@ -37,32 +37,32 @@ TodoList Application for assignment built with Spring Boot 3.x, MongoDB, and Doc
     └── test    # Unit test cases
 ## Architecture Diagram
 ```mermaid
-+-------------------+     +-------------------+     +-------------------+
-|   REST Controller |     |   Service Layer   |     |   MongoDB         |
-+-------------------+     +-------------------+     +-------------------+
-|                         |                         |
-| HTTP Requests           | Business Logic          | Database Queries
-|------------------------>|------------------------>|
-|                         |                         |
-|<------------------------|<------------------------|
-| HTTP Responses          | Processed Data          | Database Results
-+-------------------+     +-------------------+     +-------------------+
-|   DTOs            |     |   Repository      |     |  Docker Container |
-+-------------------+     +-------------------+     +-------------------+
-|                         |                         |
-| Data Mapping            | MongoDB Queries         | MongoDB Instance
-|------------------------>|------------------------>|
-|                         |                         |
-|<------------------------|<------------------------|
-| Mapped Data             | Query Results           | MongoDB Data
-+-------------------+     +-------------------+     +-------------------+
-|   Exception       |     |   Configuration   |     |  MongoDB Config   |
-+-------------------+     +-------------------+     +-------------------+
-|                         |                         |
-| Error Handling          | Spring Boot Config      | MongoDB Settings
-|------------------------>|------------------------>|
-|                         |                         |
-|<------------------------|<------------------------|
-| Custom Exceptions       | App Properties          | MongoDB Properties
-+-------------------+     +-------------------+     +-------------------+
+   +-------------------+     +-------------------+     +-------------------+
+   |   REST Controller |     |   Service Layer   |     |   MongoDB         |
+   +-------------------+     +-------------------+     +-------------------+
+   |                         |                         |
+   | HTTP Requests           | Business Logic          | Database Queries
+   |------------------------>|------------------------>|
+   |                         |                         |
+   |<------------------------|<------------------------|
+   | HTTP Responses          | Processed Data          | Database Results
+   +-------------------+     +-------------------+     +-------------------+
+   |   DTOs            |     |   Repository      |     |  Docker Container |
+   +-------------------+     +-------------------+     +-------------------+
+   |                         |                         |
+   | Data Mapping            | MongoDB Queries         | MongoDB Instance
+   |------------------------>|------------------------>|
+   |                         |                         |
+   |<------------------------|<------------------------|
+   | Mapped Data             | Query Results           | MongoDB Data
+   +-------------------+     +-------------------+     +-------------------+
+   |   Exception       |     |   Configuration   |     |  MongoDB Config   |
+   +-------------------+     +-------------------+     +-------------------+
+   |                         |                         |
+   | Error Handling          | Spring Boot Config      | MongoDB Settings
+   |------------------------>|------------------------>|
+   |                         |                         |
+   |<------------------------|<------------------------|
+   | Custom Exceptions       | App Properties          | MongoDB Properties
+   +-------------------+     +-------------------+     +-------------------+
 ```
