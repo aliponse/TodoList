@@ -17,9 +17,9 @@ TodoList Application for assignment built with Spring Boot 3.x, MongoDB, and Doc
 1. Access the Swagger UI at: http://localhost:8080/swagger-ui/index.html.
 2. Swagger api-docs file is in ./src/doc.
 ## Develop Environment
-    JDK: 17
-    Maven: 3.6.3
-    MonogoDB: 8.0.0
+1. JDK: 17
+2. Maven: 3.6.3
+3. MonogoDB: 8.0.0
 ## Project Structure
     src
     ├── main/java/com/sg/sleekflow.assignment.todolist
@@ -65,3 +65,4 @@ TodoList Application for assignment built with Spring Boot 3.x, MongoDB, and Doc
 |<------------------------|<------------------------|
 | Custom Exceptions       | App Properties          | MongoDB Properties
 +-------------------+     +-------------------+     +-------------------+
+```
