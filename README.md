@@ -36,7 +36,7 @@ TodoList Application for assignment built with Spring Boot 3.x, MongoDB, and Doc
     |   └── TodoListApplication  # Main application class
     └── test    # Unit test cases
 ## Architecture Diagram
-```mermaid
+```
    +-------------------+     +-------------------+     +-------------------+
    |   REST Controller |     |   Service Layer   |     |   MongoDB         |
    +-------------------+     +-------------------+     +-------------------+
