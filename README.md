@@ -15,11 +15,18 @@ TodoList Application for assignment built with Spring Boot 3.x, MongoDB, and Doc
    docker-compose up --build
 ## API Documentation
 1. Access the Swagger UI at: http://localhost:8080/swagger-ui/index.html.
-2. Swagger api-docs file is in ./src/doc and UI at:http://localhost:8080/v3/api-docs.
+2. Swagger file is ./src/doc/api-docs.json and UI at:http://localhost:8080/v3/api-docs.
+## DevOps
+1. CI/CD
+```
+   Git ---> Jenkins ---> Docker ---> SoapUI
+```
+2. SoapUI AutoTest example in ./src/doc/AutoTest-soapui-script.xml
 ## Develop Environment
 1. JDK: 17
 2. Maven: 3.6.3
-3. MonogoDB: 8.0.0
+3. MongoDB: 8.0.0
+4. SpringBoot: 3.0.0
 ## Project Structure
     src
     ├── main/java/com/sg/sleekflow.assignment.todolist
